@@ -171,9 +171,9 @@ fn derive_openapi_with_responses() {
     struct MyResponse;
 
     impl<'r> ToResponse<'r> for MyResponse {
-        fn response() -> (&'r str, RefOr<Response>) {
+        fn response() -> (Cow<'r, str>, RefOr<Response>) {
             (
-                "MyResponse",
+                Cow::Borrowed("MyResponse"),
                 ResponseBuilder::new().description("Ok").build().into(),
             )
         }
@@ -195,7 +195,7 @@ fn derive_openapi_with_servers() {
     #[openapi(
         servers(
             (url = "http://localhost:8989", description = "this is description"),
-            (url = "http://api.{username}:{port}", description = "remote api", 
+            (url = "http://api.{username}:{port}", description = "remote api",
                 variables(
                     ("username" = (default = "demo", description = "Default username for API")),
                     ("port" = (default = "8080", enum_values("8080", "5000", "3030"), description = "Supported ports for the API"))

@@ -97,8 +97,11 @@ impl ToTokensDiagnostics for ToResponse<'_> {
 
         tokens.extend(quote! {
             impl #to_response_impl_generics utoipa::ToResponse <#lifetime> for #ident #ty_generics #where_clause {
-                fn response() -> (& #lifetime str, utoipa::openapi::RefOr<utoipa::openapi::response::Response>) {
-                    (#name, #response.into())
+                fn response() -> (
+                    ::std::borrow::Cow<#lifetime, str>,
+                    utoipa::openapi::RefOr<utoipa::openapi::response::Response>
+                ) {
+                    (::std::borrow::Cow::Borrowed(#name), #response.into())
                 }
             }
         });
