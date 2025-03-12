@@ -1166,6 +1166,7 @@ impl IntoResponses for () {
 /// # Examples
 ///
 /// ```
+/// use std::borrow::Cow;
 /// use utoipa::{
 ///     openapi::{RefOr, Response, ResponseBuilder},
 ///     ToResponse,
@@ -1176,7 +1177,7 @@ impl IntoResponses for () {
 /// impl<'__r> ToResponse<'__r> for MyResponse {
 ///     fn response() -> (&'__r str, RefOr<Response>) {
 ///         (
-///             "MyResponse",
+///             Cow::Borrowed("MyResponse"),
 ///             ResponseBuilder::new().description("My Response").build().into(),
 ///         )
 ///     }
@@ -1186,7 +1187,7 @@ impl IntoResponses for () {
 /// [derive]: derive.ToResponse.html
 pub trait ToResponse<'__r> {
     /// Returns a tuple of response component name (to be referenced) to a response.
-    fn response() -> (&'__r str, openapi::RefOr<openapi::response::Response>);
+    fn response() -> (Cow<'__r, str>, openapi::RefOr<openapi::response::Response>);
 }
 
 /// Flexible number wrapper used by validation schema attributes to seamlessly support different

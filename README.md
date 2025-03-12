@@ -1,3 +1,10 @@
+# NOTICE
+The **Noelware/utoipa** is a fork of the main **utoipa** library that works with Noelware's needs. The changes in this fork are present and this fork is un-needed once the issues are fixed:
+
+- [**Issue `#1335`**](https://github.com/juhaku/utoipa/issues/1335): Use `Cow<'static, str>` in `ToResponse::response`
+- [**Issue `#1192`**](https://github.com/juhaku/utoipa/issues/1192): Schema type with `AnyValue` cannot be deserialized from `RefOr<...>`
+- [**PR `#1334`**](https://github.com/juhaku/utoipa/pull/1334): Add support for NonZeroU8, NonZeroU16, NonZeroU32, and NonZeroU64
+
 # utoipa - Auto-generated OpenAPI documentation
 
 [![Utoipa build](https://github.com/juhaku/utoipa/actions/workflows/build.yaml/badge.svg)](https://github.com/juhaku/utoipa/actions/workflows/build.yaml)
@@ -43,13 +50,13 @@ Refer to the existing [examples](./examples) to find out more.
 ## Features
 
 * OpenAPI 3.1
-* Pluggable, easy setup and integration with frameworks. 
+* Pluggable, easy setup and integration with frameworks.
 * No bloat, enable what you need.
 * Support for generic types
   * **Note!**<br>
     Tuples, arrays and slices cannot be used as generic arguments on types. Types implementing `ToSchema` manually should not have generic arguments, as
     they are not composeable and will result compile error.
-* Automatic schema collection from usages recursively. 
+* Automatic schema collection from usages recursively.
   * Request body from either handler function arguments (if supported by framework) or from `request_body` attribute.
   * Response body from response `body` attribute or response `content` attribute.
 * Various OpenAPI visualization tools supported out of the box.
@@ -317,7 +324,7 @@ There are few ways around this that are elaborated [here in detail](https://gith
 
 ### Auto discover for OpenAPI schemas and paths?
 
-Currently there is no build in solution to automatically discover the OpenAPI types but for your luck there is a pretty neat crate that 
+Currently there is no build in solution to automatically discover the OpenAPI types but for your luck there is a pretty neat crate that
 just does this for you called [utoipauto](https://github.com/ProbablyClem/utoipauto).
 
 ## License
